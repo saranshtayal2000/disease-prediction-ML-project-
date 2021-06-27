@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="static/images/health.ico">
+    <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+    *{
+    margin:0;
+    padding:0;
+    font-family: 'Josefin Sans', sans-serif;
+    }
+    html,
+    body,
+    header,
+    #intro {
+    height: 100%;
+    }
+    img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    }
+    </style>
+    <title>Breast Cancer Prediction</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Disease Predictor</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('heart')}}">Heart Disease<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('kidney')}}">Kidney Disease</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('diabetes')}}">Diabetes</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('liver')}}">Liver Diease</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url_for('cancer')}}">Cancer</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <!--Mask-->
+      <div id="intro" class="container-fluid view ">
+        <h1 class="text-center text-capitalize pt-5">Know your chances of getting Breast Cancer in one Click!</h1>
+        <hr class="w-75 mx-auto pt-5">
+        <div class="row mb-5">
+          <div class="col-lg-6 col-md-6 col-12 my-auto">
+            <img src="static/images/breast.jpg" class="float-left">
+            <h3>{{ prediction_text }}<h3>
+          </div>
+          <div class="col-lg-6 col-md-6 col-12">
+            <form action="{{ url_for('predict')}}" method="POST">
+            
+             <div class="form-group">
+                <label for="radius_mean">Mean of the Radius</label>
+                <input class="form-control" type="number" step="any" id="radius_mean" name="radius_mean" required="required" placeholder="Mean of the radius">
+              </div>
+              
+               <div class="form-group">
+                <label for="texture_mean">Mean of the Texture</label>
+                <input class="form-control" type="number" step="any" id="texture_mean" name="texture_mean" required="required" placeholder="Mean of the texture">
+              </div>
+              
+               <div class="form-group">
+                <label for="perimeter_mean">Mean of the Perimeters</label>
+                <input class="form-control" type="number" step="any" id="perimeter_mean" name="perimeter_mean" required="required" placeholder="Mean of the Parameter">
+              </div>
+              
+              <div class="form-group">
+                <label for="area_mean">Mean of the Area</label>
+                <input class="form-control" type="number" step="any" id="area_mean" name="area_mean" required="required" placeholder="Mean of the Area">
+              </div>
+              
+              <div class="form-group">
+                <label for="smoothness_mean">Mean of the Smoothness</label>
+                <input class="form-control" type="number" step="any" id="smoothness_mean" name="smoothness_mean" required="required" placeholder="Mean of the Smoothness">
+              </div>
+              
+              <div class="form-group">
+                <label for="compactness_mean">Mean of the Compactness</label>
+                <input class="form-control" type="number" step="any" id="compactness_mean" name="compactness_mean" required="required" placeholder="Mean of the Compactness">
+              </div>
+              
+               <div class="form-group">
+                <label for="concavity_mean">Mean of the Concavity</label>
+                <input class="form-control" type="number" step="any" id="concavity_mean" name="concavity_mean" required="required" placeholder="Mean of the concavity">
+              </div>
+              
+              <div class="form-group">
+                <!-- TODO : Year to accept only year date picker -->
+                <label for="concave points_mean">Mean of the Concave Points</label>
+                <input class="form-control" type="number" step="any" id="concave points_mean" name="concave points_mean" required="required" placeholder="Mean of the Concave Points">
+              </div>
+              
+              <div class="form-group">
+                <label for="symmetry_mean">Mean of the Symmetry</label>
+                <input class="form-control" type="number" step="any" id="symmetry_mean" name="symmetry_mean" required="required" placeholder="Mean of the Symmetry">
+              </div>
+              
+               <div class="form-group">
+                <label for="fractal_dimension_mean">Mean of Fractal Dimension</label>
+                <input class="form-control" type="number" step="any" id="fractal_dimension_mean" name="fractal_dimension_mean" required="required" placeholder="Mean of the Fractal Dimension">
+              </div>
+              
+               <div class="form-group">
+                <label for="radius_se">Radius</label>
+                <input class="form-control" type="number" step="any" id="radius_se" name="radius_se" required="required" placeholder="Radius">
+              </div>
+              
+               <div class="form-group">
+                <label for="texture_se">Texture</label>
+                <input class="form-control" type="number" step="any" id="texture_se" name="texture_se" required="required" placeholder="Texture">
+              </div>
+              
+               <div class="form-group">
+                <label for="perimeter_se">Perimeter</label>
+                <input class="form-control" type="number" step="any" id="perimeter_se" name="perimeter_se" required="required" placeholder="Perimeter">
+              </div>
+              
+              
+               <div class="form-group">
+                <label for="area_se">Area</label>
+                <input class="form-control" type="number" step="any" id="area_se" name="area_se" required="required" placeholder="Area">
+              </div>
+              
+               <div class="form-group">
+                <label for="smoothness_se">Smoothness</label>
+                <input class="form-control" type="number" step="any" id="smoothness_se" name="smoothness_se" required="required" placeholder="Smoothness">
+              </div>
+              
+              <div class="form-group">
+                <label for="compactness_se">Compactness</label>
+                <input class="form-control" type="number" step="any" id="compactness_se" name="compactness_se" required="required" placeholder="Compactness">
+              </div>
+              
+               <div class="form-group">
+                <label for="concavity_se">Concavity</label>
+                <input class="form-control" type="number" step="any" id="concavity_se" name="concavity_se" required="required" placeholder="Concavity">
+              </div>
+              
+               <div class="form-group">
+                <label for="concave points_se">Concave Points</label>
+                <input class="form-control" type="number" step="any" id="concave points_se" name="concave points_se" required="required" placeholder="Concave Points">
+              </div>
+              
+               <div class="form-group">
+                <label for="symmetry_se">Symmetry</label>
+                <input class="form-control" type="number" step="any" id="symmetry_se" name="symmetry_se" required="required" placeholder="Symmetry">
+              </div>
+              
+               <div class="form-group">
+                <label for="fractal_dimension_se">Fractal Dimension</label>
+                <input class="form-control" type="number" step="any" id="fractal_dimension_se" name="fractal_dimension_se" required="required" placeholder="Fractal Dimension">
+              </div>
+              
+              
+               <div class="form-group">
+                <label for="radius_worst">Radius Worst</label>
+                <input class="form-control" type="number" step="any" id="radius_worst" name="radius_worst" required="required" placeholder="Radius Worst">
+              </div>
+              
+               <div class="form-group">
+                <label for="texture_worst">Texture Worst</label>
+                <input class="form-control" type="number" step="any" id="texture_worst" name="texture_worst" required="required" placeholder="Texture Worst">
+              </div>
+              
+               <div class="form-group">
+                <label for="perimeter_worst">Perimeter Worst</label>
+                <input class="form-control" type="number" step="any" id="perimeter_worst" name="perimeter_worst" required="required" placeholder="Perimeter Worst">
+              </div>
+              
+              
+               <div class="form-group">
+                <label for="area_worst">Area Worst</label>
+                <input class="form-control" type="number" step="any" id="area_worst" name="area_worst" required="required" placeholder="Area Worst">
+              </div>
+              
+               <div class="form-group">
+                <label for="smoothness_worst">Smoothness Worst</label>
+                <input class="form-control" type="number" step="any" id="smoothness_worst" name="smoothness_worst" required="required" placeholder="Smoothness Worst">
+              </div>
+              
+              <div class="form-group">
+                <label for="compactness_worst">Compactness Worst</label>
+                <input class="form-control" type="number" step="any"  id="compactness_worst" name="compactness_worst" required="required" placeholder="Compactness Worst">
+              </div>
+              
+               <div class="form-group">
+                <label for="concavity_worst">Concavity Worst</label>
+                <input class="form-control" type="number" step="any" id="concavity_worst" name="concavity_worst" required="required" placeholder="Concavity Worst">
+              </div>
+              
+               <div class="form-group">
+                <label for="concave points_worst">Concave Points Worst</label>
+                <input class="form-control" type="number" step="any" id="concave points_worst" name="concave points_worst" required="required" placeholder="Concave Points Worst">
+              </div>
+              
+               <div class="form-group">
+                <label for="symmetry_worst">Symmetr Worst</label>
+                <input class="form-control" type="number" step="any" id="symmetry_worst" name="symmetry_worst" required="required" placeholder="Symmetry Worst">
+              </div>
+              
+               <div class="form-group">
+                <label for="fractal_dimension_worst">Fractal Dimension Worst</label>
+                <input class="form-control" type="number" step="any" id="fractal_dimension_worst" name="fractal_dimension_worst" required="required" placeholder="Fractal Dimension Worst">
+              </div>
+              
+              
+             
+              <button type="submit" class="btn btn-danger">Predict</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--/.Mask-->
+    </header>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+  </body>
+</html>
