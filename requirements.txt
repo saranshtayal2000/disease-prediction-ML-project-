@@ -1,5 +1,4 @@
 - @ file:///C:/ci/scikit-learn_1598377018496/work
--.ikit-learn @ file:///C:/ci/scikit-learn_1598377018496/work
 -cikit-learn @ file:///C:/ci/scikit-learn_1598377018496/work
 absl-py==0.12.0
 alabaster==0.7.12
